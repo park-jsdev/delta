@@ -35,6 +35,7 @@ Large successful applications built in Lisp include Emacs, AutoCad and Yahoo Sto
 
 ## Technologies / Requirements
 TODO
+- This project was built on 64-bit Windows 10
 
 # Getting Started
 TODO
@@ -175,6 +176,7 @@ TODO
     - Data Types
     - Procedures
     - Error Recovery
+- Incoporate Assembly for metaprogramming/code generation
 
 ## License
 This project is licensed under the terms of the MIT license.
