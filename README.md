@@ -153,9 +153,9 @@ Comments in Delta are defined by ``;``
 Parsing: ``comment : /;[^\\r\\n]*/ ;``
 
 ### Command Line Arguments:
-#### Feature: Load Function
-#### Feature: Builtin Error Function
-#### Feature: Builtin Print Function
+#### Load Function
+#### Builtin Error Function
+#### Builtin Print Function
 
 Now we have a base where can easily define Atoms, Building Blocks, Logical Operators, and Miscellaneous Functions.
 
