@@ -1,6 +1,6 @@
 # Delta
 Delta is a LISP programming language built on C. It is minimalist, fast and offers a foundation for a complete language. It can continuously change, build up on itself and improve.
-The goal of the project is to create a programming language that is easy to write algorithms, and then use an interpreter to generate code or use a compiler to compile it into a more heavyweight language.
+The goal of the project is to create a programming language that is easy to write algorithms in, and then use an interpreter to generate code or use a compiler to compile it into a more heavyweight language.
 
 LISP is a list processing language: https://www.tutorialspoint.com/lisp/lisp_program_structure.htm. LISPs have little distinction between data and code. They use the same structures to represent both.
 Large successful applications built in Lisp include Emacs, AutoCad and Yahoo Store.
