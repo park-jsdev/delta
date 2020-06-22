@@ -5,7 +5,7 @@ The goal of the project is to create a programming language that is easy to writ
 LISP is a list processing language: https://www.tutorialspoint.com/lisp/lisp_program_structure.htm. LISPs have little distinction between data and code. They use the same structures to represent both.
 Large successful applications built in Lisp include Emacs, AutoCad and Yahoo Store.
 
-<screenshots>
+![Alt text](MainSS.PNG "The interface")
 
 ## Features:
 ### Infrastructure Features:
@@ -168,6 +168,17 @@ TODO
 ## Roadmap / TODO
 - Define a standard library
 - Define algorithmic library
+- Add more Native Types
+- Add User Defined Types
+- Add List Literals
+- Add OS interaction
+- Add User Defined Macros
+- Add Variable Hashtable
+- Add Pool Allocation
+- Add Garbage Collection
+- Add Tail Call Optimisation
+- Add Lexical Scoping
+- Add Static Typing
 - Create own mpc library
 - Create an interpreter or a compiler to convert LISP back and generate code in another language.
 - Update standard library to include more:
