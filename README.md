@@ -190,10 +190,10 @@ TODO
 - Incoporate Assembly for metaprogramming/code generation
 
 ## License
-This project is licensed under the terms of the MIT license.
+This project is licensed under the terms of the [MIT](LICENSE) license.
 
 ## Credits
-- [Build Your Own Lisp])http://www.buildyourownlisp.com/_
+- [Build Your Own Lisp](http://www.buildyourownlisp.com/)
 
 
 
