@@ -165,7 +165,7 @@ TODO
 ## Deployment
 TODO
 
-## Rodamap / TODO
+## Roadmap / TODO
 - Define a standard library
 - Define algorithmic library
 - Create own mpc library
