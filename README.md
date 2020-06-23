@@ -102,7 +102,7 @@ Now we have a base where can easily define Atoms, Building Blocks, Logical Opera
 
 #### Defining Your Own Library And Loading
 in ``std.d``
-``java
+```c
 ; Fibonacci
 (fun {fib n} {
   select
@@ -110,7 +110,7 @@ in ``std.d``
     { (== n 1) 1 }
     { otherwise (+ (fib (- n 1)) (fib (- n 2))) }
 })
-``
+```
 ![Fibonacci](fibonacci.PNG)
 
 ## Testing
