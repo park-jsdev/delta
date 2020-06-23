@@ -6,9 +6,11 @@ The goal of the project is to create a programming language that is easy to writ
 Large successful applications built in Lisp include Emacs, AutoCad and Yahoo Store.
 
 ![Alt text](MainSS.PNG "The interface")
+![Alt text](delta1.PNG "Examples")
 
 ## Features:
 ### Infrastructure Features:
+- Interactive Prompt
 - Reading User Input
 - Parsing User Input
 - Polish Notation Syntax
@@ -33,38 +35,19 @@ Large successful applications built in Lisp include Emacs, AutoCad and Yahoo Sto
     - Builtin Error Function
     - Builtin Print Function
 
-## Technologies / Requirements
-TODO
-- This project was built on 64-bit Windows 10
-
-# Getting Started
-TODO
-
-## Installing
-- mpc library
-
-## Usage
-To compile:
-``$ gcc -o main.exe delta.c mpc.c`` 
-Run ``main.exe``
-
-### Instructions
-TODO with <screenshots>
-
 ## Development Notes
 In a Nutshell:
 - Delta makes use of the mpc Parser Combinator library.
 - User input parsed from mpc library functions, then used it to define grammar with the delta defined language syntax.
-- Language syntax was defined using Regex, s-expressions, q-expressions.
+- Language syntax was defined using regex, s-expressions, q-expressions.
 - Supports S-Expression input and evaluation - Internal list structure that is built up recursively of numbers, symbols and other lists. In lisp, this structure is called an S-Expression (Symbolic Expression).
 - S-expressions are just a number of other expressions between parentheses.
 - Expression can be number, operator, string, comment or other S-expression.
-- Uses a lisp value (lval) a custom data structure.
+- Uses a lisp value ``lval`` a custom data structure.
+- Uses an environment variable ``lenv`` to support variables.
 - Assigns integers to expression types and use enumerations to assign meanings to the integer values, to encode relationships between the list value structure and its variables.
 - Creates an error type to track errors.
-
-#### Reading User Input
-Uses an **Abstract Syntax Tree** as underlying data structure. At the leaves of the tree are numbers and operators which are the data to be processed, and the branch contain rules used to traverse, evaluate, and produce the branch.
+- Uses an **Abstract Syntax Tree** as underlying data structure. At the leaves of the tree are numbers and operators which are the data to be processed, and the branch contain rules used to traverse, evaluate, and produce the branch.
 This is the underlying data structure in mpc:
 ``c 
 typedef struct mpc_ast_t {
@@ -75,89 +58,70 @@ typedef struct mpc_ast_t {
   struct mpc_ast_t** children;
 } mpc_ast_t; 
 ``
-Input is defined with ``tag | contents | state`` fields for data, ``children_num`` and ``children`` for traversal information.
-Delta uses Recursion to traverse the tree.
 
-#### Parsing User Input
-We code our own grammars, building up parsers that parse more and more compicated languages. Create new rules and define them.
-Uses ``mpc`` Parser Combinator library functions. It allows writing normal code that looks like a grammar, or use special notation to write a grammar directly.
-Defined a program parser ``Delta`` which calls mpc library functions.
+## Technologies / Requirements
+TODO
+- This project was built on 64-bit Windows 10
 
-#### Polish Notation Syntax
-Representation: The operator always comes first in an expression, followed by numbers or other expressions. `` 1 + 2 + 6 `` is `` + 1 2 6 ``
+# Getting Started
+TODO
 
-#### Evaluation
-Representation: Take the parse tree as input and outputs the evaluated value
-Parsing: Counts and accumulates nodes in the parse tree then checks to see if a tag contains some substring, then recursively calls an evaluation function on it.
-The evaluation function performs a corresponding C operation based on inputs.
+## Installing
+### On Windows
+- Clone this repository with ``git clone https://github.com/park-jsdev/delta.git``
+#### Compiler
+- Install [MinGW](http://www.mingw.org/) and follow their instructions.
+#### mpc library
+- Make sure to download ``mpc.h`` and ``mpc.c`` from [mpc](https://github.com/orangeduck/mpc).
 
-#### Printing
-Passes in the parse tree into the ``eval`` function, then prints the result using C ``printf`` with ``%li`` specifier.
+## Usage
+To compile:
+``$ gcc -o main.exe delta.c mpc.c`` 
+Run ``main.exe``
+
+### Instructions
+
+#### Evaluation and Printing
+![Eval](EvalAndPrint.PNG)
 
 #### Error Handling
-When an error is encountered during evaluation, return it right away with a message, and do not perform computation, in order to prevent crash.
+![Error](error.PNG)
 
 #### Reading Expressions
-Representation: Takes in an abstract syntax tree
-Parsing: Delta reads the program, creates ``lval`` list values using constructors for each type of expression, then constructs a list value that represents it all by converting the abstract syntax tree into an S-Expression. It evaluates this value using normal Lisp rules to get the result of the program. 
-Semantics: Added built-in operators, defined as ``symbol``, which allows adding more operators, variables and functions later.
-
-#### Printing Expressions
-The print function is modified to print out S-Expressions types.
-Delta creates another function that loops over all the sub-expressions of an expression and prints these individually separated by spaces, in the same way they are input.
-
-#### Evaluating Expressions
-The evaluation function was adapted to deal with ``lval*``. It takes in some ``lval*`` and transforms it into some new ``lval*``
-
-#### Symbolic Expressions (S-Expressions)
-Syntax: S-Expressions are an internal list structure that is built up recursively of numbers, symbols, and other lists. 
-Representation: Q-Expressions are surrounded by brackets ``()``
-Parsing: The evaluation behavior is such that you look at the first item in the list, take it to be the operator, then look at all other items in the list, and take these as operands to get the result.
-Semantics: Added built-in operators, defined as ``symbol``, which allows adding more operators, variables and functions later.
-
-#### Quoted Expressions (Q-Expressions)
-Syntax: Q-Expressions are left exactly as they are when encountered by the evaluation function. This makes them ideal to store and manipulate other Lisp values.
-Representation: Q-Expressions are surrounded by curly brackets ``{}``
-Parsing: Read us
-Semantics	Add new functions for evaluating and manipulating this feature. Added built-in operators.
+![Q-Expressions](QExpressions.PNG)
 
 ### Language Features:
 
-#### Variables, allows to assign a name to a value, and allows to get a copy of that value later.
-Syntax: ``/[a-zA-Z0-9_+\\-*\\/\\\\=<>!&]+/`` (Regular Expression)
-Parsing: Use an environment structure to econde a list of relationships between names and values
-Semantics: Variable Evaluation, Defining Functions, Error Reporting
+#### Variables
+![Variables](variables.PNG)
+![Function Error Reporting](functionerrorreporting.PNG)
 
 #### User Defined Functions
-Representation: Functions are stored as ``lval``
-Parsing: Uses a builtin Lambda function ``\`` that allows to add two inputs together. Delta uses this to create user defined functions.
-Semantics: Function Defining, Function Calling, Defining Arguments
-
-#### Input Ordering
-Returns a number ``lval`` either 0 or 1 depending on the equality comparison between the two input ``lval``.
-
-#### Input Equality
-Uses a builtin function which tests between two different types of ``lval``
+![Lambda Function](lambdafunction.PNG)
 
 #### If Function
-Makes use of the Q-Expressions to encode a computation. The user passes in two Q-Expressions representing the code to be evaluated.
+![If Function](iffunction.PNG)
 
 #### Strings
-This will allow the program to start building a standard library by loading code from a file and running it. The user can load a file by supplying a string consisting of the file name.
-String ``lval`` Constructor, deletion, copying, equality, Type name and Printing functions were updated.
-Parsing: ``string  : /\"(\\\\.|[^\"])*\"/ ;``
-Semantics: Reading Strings
+![Strings](strings.PNG)
 
 #### Comments
 Comments in Delta are defined by ``;``
-Parsing: ``comment : /;[^\\r\\n]*/ ;``
-
-### Command Line Arguments:
-#### Load Function
-#### Builtin Error Function
-#### Builtin Print Function
 
 Now we have a base where can easily define Atoms, Building Blocks, Logical Operators, and Miscellaneous Functions.
+
+#### Defining Your Own Library And Loading
+in ``std.d``
+``
+; Fibonacci
+(fun {fib n} {
+  select
+    { (== n 0) 0 }
+    { (== n 1) 1 }
+    { otherwise (+ (fib (- n 1)) (fib (- n 2))) }
+})
+``
+![Fibonacci](fibonacci.PNG)
 
 ## Testing
 TODO
@@ -166,28 +130,28 @@ TODO
 TODO
 
 ## Roadmap / TODO
-- Define a standard library
-- Define algorithmic library
-- Add more Native Types
-- Add User Defined Types
-- Add List Literals
-- Add OS interaction
-- Add User Defined Macros
-- Add Variable Hashtable
-- Add Pool Allocation
-- Add Garbage Collection
-- Add Tail Call Optimisation
-- Add Lexical Scoping
-- Add Static Typing
-- Create own mpc library
-- Create an interpreter or a compiler to convert LISP back and generate code in another language.
-- Update standard library to include more:
+- [x] Define a standard library
+- [ ] Define algorithmic library
+- [ ] Add more Native Types
+- [ ] Add User Defined Types
+- [ ] Add List Literals
+- [ ] Add OS interaction
+- [ ] Add User Defined Macros
+- [ ] Add Variable Hashtable
+- [ ] Add Pool Allocation
+- [ ] Add Garbage Collection
+- [ ] Add Tail Call Optimisation
+- [ ] Add Lexical Scoping
+- [ ] Add Static Typing
+- [ ] Create own mpc library
+- [ ] Create an interpreter or a compiler to convert LISP back and generate code in another language.
+- [ ] Update standard library to include more:
     - Syntax
     - Semantics
     - Data Types
     - Procedures
     - Error Recovery
-- Incoporate Assembly for metaprogramming/code generation
+- [ ] Incoporate Assembly for metaprogramming/code generation
 
 ## License
 This project is licensed under the terms of the [MIT](LICENSE) license.
