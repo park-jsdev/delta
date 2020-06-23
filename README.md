@@ -47,17 +47,7 @@ In a Nutshell:
 - Uses an environment variable ``lenv`` to support variables.
 - Assigns integers to expression types and use enumerations to assign meanings to the integer values, to encode relationships between the list value structure and its variables.
 - Creates an error type to track errors.
-- Uses an **Abstract Syntax Tree** as underlying data structure. At the leaves of the tree are numbers and operators which are the data to be processed, and the branch contain rules used to traverse, evaluate, and produce the branch.
-This is the underlying data structure in mpc:
-``c 
-typedef struct mpc_ast_t {
-  char* tag;
-  char* contents;
-  mpc_state_t state;
-  int children_num;
-  struct mpc_ast_t** children;
-} mpc_ast_t; 
-``
+- Uses an *Abstract Syntax Tree* as underlying data structure. At the leaves of the tree are numbers and operators which are the data to be processed, and the branch contain rules used to traverse, evaluate, and produce the branch.
 
 ## Technologies / Requirements
 TODO
@@ -112,7 +102,7 @@ Now we have a base where can easily define Atoms, Building Blocks, Logical Opera
 
 #### Defining Your Own Library And Loading
 in ``std.d``
-``
+``java
 ; Fibonacci
 (fun {fib n} {
   select
