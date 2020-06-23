@@ -48,6 +48,16 @@ In a Nutshell:
 - Assigns integers to expression types and use enumerations to assign meanings to the integer values, to encode relationships between the list value structure and its variables.
 - Creates an error type to track errors.
 - Uses an *Abstract Syntax Tree* as underlying data structure. At the leaves of the tree are numbers and operators which are the data to be processed, and the branch contain rules used to traverse, evaluate, and produce the branch.
+This is the underlying data structure in mpc:
+```c 
+typedef struct mpc_ast_t {
+  char* tag;
+  char* contents;
+  mpc_state_t state;
+  int children_num;
+  struct mpc_ast_t** children;
+} mpc_ast_t; 
+```
 
 ## Technologies / Requirements
 TODO
@@ -99,6 +109,7 @@ Run ``main.exe``
 Comments in Delta are defined by ``;``
 
 Now we have a base where can easily define Atoms, Building Blocks, Logical Operators, and Miscellaneous Functions.
+I recommend creating your own library in a separate file to load with Delta to create easy to use programs.
 
 #### Defining Your Own Library And Loading
 in ``std.d``
